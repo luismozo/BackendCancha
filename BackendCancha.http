@@ -1,0 +1,6 @@
+@BackendCancha_HostAddress = http://localhost:5170
+
+GET {{BackendCancha_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

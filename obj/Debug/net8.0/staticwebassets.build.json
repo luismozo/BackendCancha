@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "wqF72jVfNz5PDSc0Itx8YZ2EQ3n65aEvwAP3TE7gTqw=",
+  "Source": "BackendCancha",
+  "BasePath": "_content/BackendCancha",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
