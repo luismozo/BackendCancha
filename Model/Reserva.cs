@@ -24,8 +24,13 @@ namespace BackendCancha.Model
         [Required]
         public string MetodoPago { get; set; } = default!;
 
-        // Relación con los detalles de la reserva
-        // Inicializamos la colección para evitar advertencias de nulabilidad.
+        // --- PROPIEDAD AÑADIDA ---
+        [Required]
+        [StringLength(50)]
+        public string Estado { get; set; } = "Pendiente"; // Valor por defecto
+
+        // --- Fin de la propiedad añadida ---
+
         public ICollection<ReservaDetalle> Detalles { get; set; } = new List<ReservaDetalle>();
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendCancha.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20251009204224_InitialCreate")]
+    [Migration("20251026224318_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -115,6 +115,82 @@ namespace BackendCancha.Migrations
                     b.ToTable("Productos");
                 });
 
+            modelBuilder.Entity("BackendCancha.Model.Reserva", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("MetodoPago")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Reserva");
+                });
+
+            modelBuilder.Entity("BackendCancha.Model.ReservaDetalle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CanchaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("FechaReservaCancha")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<TimeSpan?>("HoraFin")
+                        .HasColumnType("time(6)");
+
+                    b.Property<TimeSpan?>("HoraInicio")
+                        .HasColumnType("time(6)");
+
+                    b.Property<decimal>("PrecioUnitario")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int?>("ProductoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReservaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CanchaId");
+
+                    b.HasIndex("ProductoId");
+
+                    b.HasIndex("ReservaId");
+
+                    b.ToTable("ReservaDetalle");
+                });
+
             modelBuilder.Entity("BackendCancha.Model.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -159,7 +235,7 @@ namespace BackendCancha.Migrations
                             Apellido = "Principal",
                             Correo = "admin@example.com",
                             Nombre = "Admin",
-                            PasswordHash = "$2a$11$QoYb6Or.nI9M5pHXl2gQGuk3AEz4KKRPmMhl4VaTsS2KVHMfgWwW6",
+                            PasswordHash = "$2a$11$dSYL2D/GZwoWYtvoGU45dunc5nOCfVtVJSUm7TkwaDKQOVDQ1hM8i",
                             Rol = "admin",
                             Telefono = "1234567890"
                         });
@@ -176,9 +252,48 @@ namespace BackendCancha.Migrations
                     b.Navigation("CategoriaP");
                 });
 
+            modelBuilder.Entity("BackendCancha.Model.Reserva", b =>
+                {
+                    b.HasOne("BackendCancha.Model.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("BackendCancha.Model.ReservaDetalle", b =>
+                {
+                    b.HasOne("BackendCancha.Model.Canchas", "Cancha")
+                        .WithMany()
+                        .HasForeignKey("CanchaId");
+
+                    b.HasOne("BackendCancha.Model.Productos", "Producto")
+                        .WithMany()
+                        .HasForeignKey("ProductoId");
+
+                    b.HasOne("BackendCancha.Model.Reserva", "Reserva")
+                        .WithMany("Detalles")
+                        .HasForeignKey("ReservaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cancha");
+
+                    b.Navigation("Producto");
+
+                    b.Navigation("Reserva");
+                });
+
             modelBuilder.Entity("BackendCancha.Model.CategoriaP", b =>
                 {
                     b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("BackendCancha.Model.Reserva", b =>
+                {
+                    b.Navigation("Detalles");
                 });
 #pragma warning restore 612, 618
         }

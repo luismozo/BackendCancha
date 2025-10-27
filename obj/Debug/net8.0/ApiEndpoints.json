@@ -323,6 +323,69 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BackendCancha.Controllers.ReservasController",
+    "Method": "GetAllReservas",
+    "RelativePath": "api/Reservas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackendCancha.Controllers.ReservasController",
+    "Method": "DeleteReserva",
+    "RelativePath": "api/Reservas/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackendCancha.Controllers.ReservasController",
+    "Method": "UpdateReservaStatus",
+    "RelativePath": "api/Reservas/{id}/status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "BackendCancha.Controllers.UpdateStatusDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackendCancha.Controllers.ReservasController",
+    "Method": "GetReservasByUser",
+    "RelativePath": "api/Reservas/user/{usuarioId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BackendCancha.Controllers.UsuarioController",
     "Method": "CrearUsuario",
     "RelativePath": "api/Usuario",

@@ -555,6 +555,104 @@
             "description": "OK"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Reservas"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservas/user/{usuarioId}": {
+      "get": {
+        "tags": [
+          "Reservas"
+        ],
+        "parameters": [
+          {
+            "name": "usuarioId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservas/{id}/status": {
+      "put": {
+        "tags": [
+          "Reservas"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStatusDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStatusDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStatusDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservas/{id}": {
+      "delete": {
+        "tags": [
+          "Reservas"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/api/Usuario/login": {
@@ -790,6 +888,19 @@
           "precio": {
             "type": "number",
             "format": "double"
+          },
+          "fechaReserva": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "horaInicio": {
+            "type": "string",
+            "nullable": true
+          },
+          "horaFin": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -956,6 +1067,16 @@
           "categoriaPId": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateStatusDTO": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

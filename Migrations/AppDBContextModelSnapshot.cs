@@ -120,6 +120,11 @@ namespace BackendCancha.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime(6)");
 
@@ -153,6 +158,15 @@ namespace BackendCancha.Migrations
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("FechaReservaCancha")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<TimeSpan?>("HoraFin")
+                        .HasColumnType("time(6)");
+
+                    b.Property<TimeSpan?>("HoraInicio")
+                        .HasColumnType("time(6)");
 
                     b.Property<decimal>("PrecioUnitario")
                         .HasColumnType("decimal(18, 2)");
@@ -218,7 +232,7 @@ namespace BackendCancha.Migrations
                             Apellido = "Principal",
                             Correo = "admin@example.com",
                             Nombre = "Admin",
-                            PasswordHash = "$2a$11$Gp4/n5hSsWdm.XX8t0f74.z9hRbgTLW71Z50P/Slzh/v7TvQbbqI.",
+                            PasswordHash = "$2a$11$dSYL2D/GZwoWYtvoGU45dunc5nOCfVtVJSUm7TkwaDKQOVDQ1hM8i",
                             Rol = "admin",
                             Telefono = "1234567890"
                         });
